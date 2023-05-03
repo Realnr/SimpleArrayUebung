@@ -173,9 +173,14 @@ class MainProgramm {
      * Die Methode soll einen Wert des Typs boolean zurückgeben.
      */
     private static boolean checkArray(int[] array){
-        boolean result= false;
-        for (int i = 0; i < findMaximum(i); i++) {
+        boolean result= true;
+        for (int i = 0; i < findMaximum(array); i++) {
             if(array[i] < array[i+1]){
+                result = false;
+            }
+        }
+        for (int i = array.length; i > findMaximum(array); i--) {
+            if(array[i] < array[i-1]){
                 result = false;
             }
         }
