@@ -8,7 +8,7 @@ class MainProgramm {
     private static int[] numbers;
 
     public static void main(String[] args){
-        withNegatives = false;
+        withNegatives = true;
         maxAbsolute = 100;
         numbers = new int[10];
         fillArray(numbers, withNegatives, maxAbsolute);
@@ -21,6 +21,9 @@ class MainProgramm {
         System.out.println("In diesem Array gibt es " + countNegatives(numbers) + " negative Zahlen.");
         System.out.println("Summe der negativen Zahlen: " + sumUpNegatives(numbers));
         System.out.println(findMaximum(numbers));
+        System.out.println(findMaximumIndex(numbers));
+        System.out.println(countMaximum(numbers));
+        showArray(increaseArray(numbers,5));
     }
 
     private static void fillArray(int[] array, boolean wN, int maxA){
@@ -132,6 +135,22 @@ class MainProgramm {
         return result;
     }
 
+//funktioniert nicht weil simple datentypen arays nicht null sonder mit 0 starten ohne eine initialisierung
+//    private static int[] findMaximumIndexes(int[] array){
+//        int result[] = new int[countMaximum(array)];
+//        for(int i = 0; i < array.length; i++){
+//            if(array[i] == findMaximum(array)){
+//                for(int j = 0;j < result.length; j++){
+//                    if (result[j] != 0 ) {
+//
+//                    }
+//                }
+//            }
+//        }
+//
+//        return result;
+//    }
+
 
     /** 6. Bestimmen der Häufigkeit des Maximums in einem Feld
      * Schreiben Sie eine Methode countMaximum, die ein Array des Typs int als Parameter
@@ -156,8 +175,8 @@ class MainProgramm {
      */
     private static boolean isSorted(int[] array) {
        boolean result = true;
-        for (int i = 0; i < array.length; i++) {
-            if(array[i] < array[i+1]){
+        for (int i = 0; i < array.length-1; i++) {
+            if(array[i] > array[i+1]){
                 result = false;
             }
         }
@@ -172,18 +191,14 @@ class MainProgramm {
      * ob es sich bei dem Array um ein Palindrom handelt.
      * Die Methode soll einen Wert des Typs boolean zurückgeben.
      */
-    private static boolean checkArray(int[] array){
-        boolean result= true;
-        for (int i = 0; i < findMaximum(array); i++) {
-            if(array[i] < array[i+1]){
+    private static boolean checkIfPalindrom(int[] array){
+        boolean result = true;
+        for (int i = 0; i < array.length; i++) {
+            if(array[i] == array[array.length-i]){
                 result = false;
             }
         }
-        for (int i = array.length; i > findMaximum(array); i--) {
-            if(array[i] < array[i-1]){
-                result = false;
-            }
-        }
+        return result;
     }
 
 
@@ -194,6 +209,12 @@ class MainProgramm {
      * Beispiel: Werden ein Array mit den Elementen 80,7,1,56,11,72,43,37 als erstes und der Wert 17 als zweites Argument übergeben,
      * so soll ein neues(!) Array mit den Werten 97,24,18,73,28,89,60,54 zurückgegeben werden.
      */
-
+    private static int[] increaseArray(int[] array, int increase){
+        int[] newArray = array;
+        for(int i = 0; i < array.length; i++){
+            newArray[i] += increase;
+        }
+        return newArray;
+    }
 
 }
