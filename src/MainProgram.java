@@ -11,19 +11,24 @@ class MainProgramm {
         withNegatives = true;
         maxAbsolute = 100;
         numbers = new int[10];
+
         fillArray(numbers, withNegatives, maxAbsolute);
 
+
+        bogosort(numbers);
+        System.out.println(numbers);
         showArray(numbers);
 
         //Hier sehen Sie Beispiele, wie man Methoden mit Rückgabewert aufrufen und dank der Systemkonsole testen kann.
         //Bevor die Methoden umgesetzt sind, werden sie nur 0 zurückgeben.
-        System.out.println("Summe aller Zahlen im Array: " + sumUp(numbers));
+       /* System.out.println("Summe aller Zahlen im Array: " + sumUp(numbers));
         System.out.println("In diesem Array gibt es " + countNegatives(numbers) + " negative Zahlen.");
         System.out.println("Summe der negativen Zahlen: " + sumUpNegatives(numbers));
         System.out.println(findMaximum(numbers));
         System.out.println(findMaximumIndex(numbers));
-        System.out.println(countMaximum(numbers));
-        showArray(increaseArray(numbers,5));
+        System.out.println(countMaximum(numbers)); */
+
+
     }
 
     private static void fillArray(int[] array, boolean wN, int maxA){
@@ -216,5 +221,24 @@ class MainProgramm {
         }
         return newArray;
     }
+    private static void bogosort(int[] array){
+        while(!isSorted(array)){
+            //shuffle
 
+            int[] newarray = new int[array.length]; // neueus array in dem die neuen werte rein gemacht wurden
+            for (int i = 0; i < array.length; i++) {
+                int random = (int)(Math.random()*array.length); //ne random zahl die als random index fungiert
+                //guckt wo ne freie stelle liegt
+                while(newarray[random] != 0){
+                    random = (int)(Math.random()*array.length);
+                }
+                //füllt diese neue stelle
+                    newarray[random] = array[i];
+            }
+            for (int i = 0; i < array.length; i++) {
+                array[i] = newarray[i];
+            }
+        }
+        //return array;
+    }
 }
